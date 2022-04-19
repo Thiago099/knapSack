@@ -37,13 +37,13 @@ function update()
 
   let current_limit = max.value
   let current_items = [...items.value] as item[]
-  current_items.map(item=>item.selected = false)
+  current_items.map(item => item.selected = false)
   while(true)
   {
       
       let best : best = {
-          weight:-Infinity,
-          item:null
+          weight: -Infinity,
+          item: null
       }
       current_items = current_items.filter(item => item.cost <= current_limit)
       for(const subject of current_items)
@@ -53,10 +53,9 @@ function update()
           {
               if(item != subject)
               {
-
                 if(item.cost > current_limit - subject.cost)
                 {
-                    weight -= item.value
+                  weight -= item.value
                 }
                 else
                 {
