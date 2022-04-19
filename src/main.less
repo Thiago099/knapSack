@@ -1,0 +1,68 @@
+/* BASIC */
+body{
+    background-color: @dark;
+    color:white;
+    overflow-y: scroll;
+}
+:root {
+    color-scheme: dark;
+}
+.no-select::selection, .no-select *::selection {
+background-color: Transparent;
+}
+.no-select{
+    cursor: default;
+}
+
+.form-control, .form-select, .form-control:focus{
+    background-color: @dark;
+    color:@caption;
+    border-color: @bright;
+}
+.form-select{
+    background:@dark url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px !important;
+}
+
+code{
+    background-color:@dark;
+}
+::placeholder {
+    color: red;
+}
+
+.danger{
+    --color: rgb(255,50,50);
+    --foreground: white;
+}	
+.success{
+    --color: rgb(50,170,50);
+    --foreground: white;
+}
+.info{
+    --color: rgb(50, 170, 190);
+    --foreground: white;
+}
+.warning{
+    --color: rgb(255, 170, 50);
+    --foreground: black;
+}
+.hover{
+    transition: all .2s ease-in-out;
+    color: #aaa;
+}
+.hover:hover{
+    color: var(--color)
+}
+.back-hover{
+    transition: all .2s ease-in-out;
+    border:1px solid @bright;
+    color:@caption;
+    background-color: @medium;
+}
+.back-hover:hover{
+    background-color: var(--color);
+    color:var(--foreground);
+}
+.inert{
+    color: var(--color)
+}
