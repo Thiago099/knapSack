@@ -48,10 +48,10 @@ function update()
       current_items = current_items.filter(item => item.cost <= current_limit)
       for(const subject of current_items)
       {
-          let weight = subject.value 
+        let weight = subject.value
           for(const item of current_items)
           {
-              if(item != subject)
+            if(item != subject)
               {
                 if(item.cost > current_limit - subject.cost)
                 {
@@ -63,9 +63,11 @@ function update()
                 }
               }
           }
+          console.log(subject)
+          console.log(weight)
           if(weight > best.weight)
           {
-              best.item = subject
+            best.item = subject
               best.weight = weight
           }
       }

@@ -1,2 +1,2 @@
-# knapsack problem
-this is a user interface to test the knapsack problem algorithim
+# knapsack problem  
+currently heuristic algorithm works only with the nodes that go over the max value
