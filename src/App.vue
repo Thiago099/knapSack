@@ -3,20 +3,28 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref, computed } from 'vue'
 
-const itens = ref([])
+const itens = ref([] as object[])
+
+function add()
+{
+  itens.value.push({
+    cost:0,
+    value:0,
+  })
+}
 
 </script>
 
 <template>
 <div class="container" style="margin-top:80px">
   <div class="row">
-    <div v-for="item in itens" :key="item">
+    <div v-for="item in itens" :key="item" class="row">
       <div class="form-group col-5">
-        <label for="cost">Cost</label>
+        <label for="cost">Cost:</label>
         <input type="number" id="cost" class="form-control" v-model="item.cost"/>
       </div>
       <div class="form-group col-5">
-        <label for="value">Value</label>
+        <label for="value">Value:</label>
         <input type="number" id="value" class="form-control" v-model="item.value"/>
       </div>
       <div class="form-group col-2" style="vertical-align:middle">
@@ -26,14 +34,14 @@ const itens = ref([])
             <button class="btn btn-danger" @click="calculate">Remove</button>
           </div>
           <div class="col-6">
-            <button class="btn btn-success">Add</button>
+            <button class="btn btn-success" @click="add">Add</button>
           </div>
         </div>
       </div>
     </div>
     <div class="row" style="margin-top:10px">
         <div v-if="itens.length==0">
-          <button class="btn btn-success">Add</button>
+          <button class="btn btn-success" @click="add">Add</button>
         </div>
       </div>
     <div>
