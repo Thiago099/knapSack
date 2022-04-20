@@ -13,13 +13,13 @@ export function add(index:number)
         value: 0,
         selected: false
     })
-    solve(items.value, max.value)
+    update()
 }
 
 export  function remove(index:number)
 {
     items.value.splice(index,1)
-    solve(items.value, max.value)
+    update()
 }
 
 export function update()

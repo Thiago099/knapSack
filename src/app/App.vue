@@ -36,9 +36,9 @@ import {items, max, add, remove, update} from './script'
         </div>
       </div>
     </div>
-    <div class="row" style="margin-top:10px;margin:10px">
+    <div class="row">
         <div v-if="items.length == 0">
-          <button class="btn btn-success" @click="add(items.length)">Add</button>
+          <button class="btn btn-success" @click="add(items.length)"><i class="fa fa-plus"></i></button>
         </div>
       </div>
   </div>
