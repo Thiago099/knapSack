@@ -5,6 +5,8 @@ const data = JSON.parse(window.localStorage.getItem('data')) || {items:[], max:0
 
 export const items = ref(data.items)
 export const max = ref(data.max)
+export const elapsed = ref('0')
+
 
 export function add(index : number)
 {
@@ -29,7 +31,9 @@ export function clear(){
 
 export function update()
 {
+    const start_time = performance.now()
     const selected = solve(items.value, max.value)
+    elapsed.value = (performance.now() - start_time).toFixed(2)
     items.value.map(item => item.selected = false)
     selected.map(item => item.selected = true)
     window.localStorage.setItem('data',JSON.stringify({ items: items.value, max: max.value }))

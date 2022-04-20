@@ -1,7 +1,7 @@
 export default function solve(items, max)
 {
     let current_limit = max
-    let current_items = [...items]
+    let current_items = [...items].filter(item => item.cost != 0)
     let selected_items = []
     while(true)
     {
@@ -65,5 +65,5 @@ export default function solve(items, max)
         }
         else break
     }
-    return selected_items
+    return [...items.filter(item => item.cost == 0),...selected_items]
 }
