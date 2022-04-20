@@ -94,6 +94,7 @@ function update()
 }
 .item{
   padding: 10px;
+  padding-bottom:20px;
   border-radius: 10px;
   margin: 10px;
 }
