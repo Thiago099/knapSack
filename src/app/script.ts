@@ -6,7 +6,7 @@ const data = JSON.parse(window.localStorage.getItem('data')) || {items:[], max:0
 export const items = ref(data.items)
 export const max = ref(data.max)
 export const elapsed = ref('0')
-
+update()
 
 export function add(index : number)
 {

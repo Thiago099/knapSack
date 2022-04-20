@@ -1,5 +1,6 @@
 export default function solve(items, max)
 {
+    if(items.reduce((previous, current) => previous + current.cost, 0) < max) return {selected:items,calls:0}
     let current_limit = max
     let current_items = [...items].filter(item => item.cost != 0)
     let selected_items = []
