@@ -35,8 +35,7 @@ export default function solve(items, max)
                     best.item = subject
                 }
             }
-            else
-            if(weight > best.weight)
+            else if(weight > best.weight)
             {
                 best.item = subject
                 best.weight = weight
