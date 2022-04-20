@@ -24,8 +24,8 @@ import {items, max, add, remove, update, total, save_file, load_file, clear} fro
       <div class="form-group col-5 row">
       <label for="" style="margin-bottom:6px">&nbsp;</label>
         <div class="btn-group">
-            <button class="btn btn-warning" @click="load_file">Save <i class="fa fa-floppy-o"></i></button>
-            <button class="btn btn-info" @click="save_file">Load <i class="fa fa-download"></i></button>
+            <button class="btn btn-warning" @click="load_file">Load <i class="fa fa-download"></i></button>
+            <button class="btn btn-info" @click="save_file">Save <i class="fa fa-floppy-o"></i></button>
             <button class="btn btn-primary" @click="update">Update <i class="fa fa-rotate-left"></i></button>
             <button class="btn btn-danger" @click="clear">Clear <i class="fa fa-times"></i></button>
         </div>
