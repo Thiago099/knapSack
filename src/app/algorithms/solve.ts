@@ -17,6 +17,8 @@ export default function solve(items, max)
             function find_value(items, cost, value)
             {
                 let weight = value
+                const costs = []
+                const values = []
                 for(const item of current_items)
                 {
                     if(!items.includes(item))
@@ -24,12 +26,17 @@ export default function solve(items, max)
                         if(item.cost > current_limit - cost)
                         {
                             weight -= item.value
+                            costs.push(item)
                         }
                         else
                         {
-                            weight += find_value([...items, item], cost + item.cost, value + item.value)
+                            values.push(item)
                         }
                     }
+                }
+                for(const value of values)
+                {
+                    weight += find_value([...items,...costs, value], cost + value.cost, value.value)
                 }
                 return weight
             }
