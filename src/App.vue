@@ -2,19 +2,11 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref, computed } from 'vue'
-interface item{
-  cost : number
-  value : number
-  selected: boolean
-}
-interface best{
-  weight: number
-  item: item
-}
+import update from './solve'
 const data = JSON.parse(window.localStorage.getItem('data')) || {items:[], max:0}
 const items = ref(data.items)
 const max = ref(data.max)
-update()
+update(items.value, max.value)
 
 function add(index:number)
 {
@@ -23,70 +15,15 @@ function add(index:number)
     value:0,
     selected:false
   })
-  update()
+  update(items.value, max.value)
 }
 
 function remove(index:number)
 {
   items.value.splice(index,1)
-  update()
+  update(items.value, max.value)
 }
-function update()
-{
-  console.clear()
 
-  let current_limit = max.value
-  let current_items = [...items.value] as item[]
-  current_items.map(item => item.selected = false)
-  while(true)
-  {
-      
-      let best : best = {
-          weight: -Infinity,
-          item: null
-      }
-      current_items = current_items.filter(item => item.cost <= current_limit)
-      for(const subject of current_items)
-      {
-        let weight = subject.value
-          for(const item of current_items)
-          {
-            if(item != subject)
-              {
-                if(item.cost > current_limit - subject.cost)
-                {
-                  weight -= item.value
-                }
-                else
-                {
-                  weight += item.value
-                }
-              }
-          }
-          if(weight == best.weight)
-          {
-            if(subject.value > best.item.value)
-            {
-              best.item = subject
-            }
-          }
-          else
-          if(weight > best.weight)
-          {
-              best.item = subject
-              best.weight = weight
-          }
-      }
-      if(best.item)
-      {
-          current_items = current_items.filter(item => item != best.item)
-          best.item.selected = true
-          current_limit -= best.item.cost
-      }
-      else break
-  }
-  window.localStorage.setItem('data',JSON.stringify({items:items.value,max:max.value}))
-}
 </script>
 <style scoped>
 .selected{
@@ -105,16 +42,16 @@ function update()
   <div class="row">
     <div class="form-group col-10"  style="margin-left:20px;">
       <label for="cost">Max:</label>
-      <input type="number" id="cost" class="form-control" v-model="max" @input="update"/>
+      <input type="number" id="cost" class="form-control" v-model="max" @input="update(items, max)"/>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
       <div class="form-group col-5">
         <label for="cost">Cost:</label>
-        <input type="number" id="cost" class="form-control" v-model="item.cost" @input="update"/>
+        <input type="number" id="cost" class="form-control" v-model="item.cost" @input="update(items, max)"/>
       </div>
       <div class="form-group col-5">
         <label for="value">Value:</label>
-        <input type="number" id="value" class="form-control" v-model="item.value" @input="update"/>
+        <input type="number" id="value" class="form-control" v-model="item.value" @input="update(items, max)"/>
       </div>
       <div class="form-group col-2" style="vertical-align:middle">
         <div class="row">
