@@ -13,12 +13,13 @@ export default function solve(items, max)
         current_items = current_items.filter(item => item.cost <= current_limit)
         for(const subject of current_items)
         {
-        let weight = subject.value
+            let weight = subject.value
+            
             for(const item of current_items)
             {
-            if(item != subject)
+                if(item != subject)
                 {
-                if(item.cost > current_limit - subject.cost)
+                    if(item.cost > current_limit - subject.cost)
                     {
                         weight -= item.value
                     }
@@ -28,6 +29,7 @@ export default function solve(items, max)
                     }
                 }
             }
+            
             if(weight == best.weight)
             {
                 if(subject.value > best.item.value)
