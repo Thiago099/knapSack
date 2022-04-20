@@ -3,9 +3,9 @@ export default function solve(items, max)
     let current_limit = max
     let current_items = [...items]
     let selected_items = []
+
     while(true)
     {
-        
         let best = {
             weight: -Infinity,
             item: null
@@ -29,10 +29,9 @@ export default function solve(items, max)
                     }
                 }
             }
-            
             if(weight == best.weight)
             {
-                if(subject.value > best.item.value)
+                if((subject.value - subject.cost) > (best.item.value - best.item.cost))
                 {
                     best.item = subject
                 }
