@@ -12,9 +12,9 @@ export default function solve(items, max)
         current_items = current_items.filter(item => item.cost <= current_limit)
         for(const subject of current_items)
         {
-            let weight = find_value([subject], subject.cost, subject.value)
+            let weight = find_weight([subject], subject.cost, subject.value)
             
-            function find_value(items, cost, value)
+            function find_weight(items, cost, value)
             {
                 let weight = value
                 const costs = []
@@ -36,7 +36,7 @@ export default function solve(items, max)
                 }
                 for(const value of values)
                 {
-                    weight += find_value([...items,...costs, value], cost + value.cost, value.value)
+                    weight += find_weight([...items, ...costs, value], cost + value.cost, value.value)
                 }
                 return weight
             }
