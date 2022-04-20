@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {items, max, add, remove, update, total} from './script'
+import {items, max, add, remove, update, total, save_file, load_file} from './script'
 
 </script>
 <style scoped>
@@ -21,6 +21,13 @@ import {items, max, add, remove, update, total} from './script'
         <label for="cost" class="value title">Total:</label>
         <input type="number" id="cost" class="form-control value" :value="total" disabled/>
       </div>
+      <div class="form-group col-2 row">
+      <label for="" style="margin-bottom:6px">&nbsp;</label>
+        <div class="btn-group">
+            <button class="btn btn-warning" @click="load_file"><i class="fa fa-upload"></i></button>
+            <button class="btn btn-info" @click="save_file"><i class="fa fa-download"></i></button>
+        </div>
+      </div>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
       <div class="form-group col-5">
@@ -34,7 +41,6 @@ import {items, max, add, remove, update, total} from './script'
       <div class="form-group col-2 row" style="vertical-align:middle">
         <label for="" style="margin-bottom:6px">&nbsp;</label>
         <div class="btn-group">
-          
             <button class="btn btn-danger" @click="remove(index)"><i class="fa fa-trash"></i></button>
             <button class="btn btn-success" @click="add(index + 1)"><i class="fa fa-plus"></i></button>
         </div>

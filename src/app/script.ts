@@ -35,3 +35,39 @@ export const total = computed(() =>
         .filter(item => item.selected)
         .reduce((previous, current) => previous + current.value, 0)
 )
+
+export function save_file()
+{
+    const data = max.value + '\n' + items.value.map(item => `${item.cost} ${item.value}`).join('\n')
+    const blob = new Blob([data], {type: 'text/plain'})
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = 'data.txt'
+    link.click()
+    link.remove()
+}
+
+export function load_file()
+{
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.onchange = (event : any) => {
+        const file = (event.target as HTMLInputElement) .files[0]
+        const reader = new FileReader()
+        reader.onload = (event) => {
+            const data = (reader.result as string) .split('\n')
+            max.value = parseInt(data[0])
+            items.value = data.slice(1).map(line => {
+                const [cost, value] = line.split(' ')
+                return {
+                    cost: parseInt(cost),
+                    value: parseInt(value),
+                    selected: false
+                }
+            })
+        }
+        reader.readAsText(file)
+    }
+    input.click()
+    input.remove()
+}
