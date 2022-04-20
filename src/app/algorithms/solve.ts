@@ -3,7 +3,7 @@ export default function solve(items, max)
     let current_limit = max
     let current_items = [...items]
     let selected_items = []
-
+    current_items.map(item => item.weight = item.value - item.cost)
     while(true)
     {
         let best = {
@@ -31,7 +31,7 @@ export default function solve(items, max)
             }
             if(weight == best.weight)
             {
-                if((subject.value - subject.cost) > (best.item.value - best.item.cost))
+                if(subject.weight > best.item.weight)
                 {
                     best.item = subject
                 }
