@@ -31,9 +31,9 @@ function remove(index:number)
   items.value.splice(index,1)
   update()
 }
-
 function update()
 {
+  console.clear()
 
   let current_limit = max.value
   let current_items = [...items.value] as item[]
@@ -63,11 +63,17 @@ function update()
                 }
               }
           }
-          console.log(subject)
-          console.log(weight)
+          if(weight == best.weight)
+          {
+            if(subject.value > best.item.value)
+            {
+              best.item = subject
+            }
+          }
+          else
           if(weight > best.weight)
           {
-            best.item = subject
+              best.item = subject
               best.weight = weight
           }
       }
