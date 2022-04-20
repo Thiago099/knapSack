@@ -16,7 +16,7 @@ export function add(index:number)
     update()
 }
 
-export  function remove(index:number)
+export function remove(index:number)
 {
     items.value.splice(index,1)
     update()
