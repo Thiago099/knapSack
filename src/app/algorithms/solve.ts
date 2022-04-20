@@ -3,7 +3,6 @@ export default function solve(items, max)
     let current_limit = max
     let current_items = [...items]
     let selected_items = []
-    current_items.map(item => item.selected = false)
     while(true)
     {
         
