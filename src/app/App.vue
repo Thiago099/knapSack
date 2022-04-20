@@ -13,19 +13,23 @@ import {items, max, add, remove, update} from './script'
 <div class="container">
   <div class="row">
     <div class="row item">
-      <div class="form-group col-10">
+      <div class="form-group col-5">
         <label for="cost" class="max title">Max:</label>
-        <input type="number" id="cost" class="form-control" v-model="max" @input="update()"/>
+        <input type="number" id="cost" class="form-control max" v-model="max" @input="update()"/>
+      </div>
+      <div class="form-group col-5">
+        <label for="cost" class="total title">Total:</label>
+        <input type="number" id="cost" class="form-control total" :value="items.filter(item=>item.selected).reduce((previous, current)=>previous + current.value,0)" disabled/>
       </div>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
       <div class="form-group col-5">
         <label for="cost" class="cost title">Cost:</label>
-        <input type="number" id="cost" class="form-control" v-model="item.cost" @input="update()"/>
+        <input type="number" id="cost" class="form-control cost" v-model="item.cost" @input="update()"/>
       </div>
       <div class="form-group col-5">
         <label for="value" class="value title">Value:</label>
-        <input type="number" id="value" class="form-control" v-model="item.value" @input="update()"/>
+        <input type="number" id="value" class="form-control value" v-model="item.value" @input="update()"/>
       </div>
       <div class="form-group col-2 row" style="vertical-align:middle">
         <label for="" style="margin-bottom:6px">&nbsp;</label>
