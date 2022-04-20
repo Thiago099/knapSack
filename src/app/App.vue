@@ -13,36 +13,36 @@ import {items, max, add, remove, update, total, save_file, load_file} from './sc
 <div class="container">
   <div class="row">
     <div class="row item">
-      <div class="form-group col-5">
+      <div class="form-group col-4">
         <label for="cost" class="cost title">Max:</label>
         <input type="number" id="cost" class="form-control cost" v-model="max" @input="update()"/>
       </div>
-      <div class="form-group col-5">
+      <div class="form-group col-4">
         <label for="cost" class="value title">Total:</label>
         <input type="number" id="cost" class="form-control value" :value="total" disabled/>
       </div>
-      <div class="form-group col-2 row">
+      <div class="form-group col-4 row">
       <label for="" style="margin-bottom:6px">&nbsp;</label>
         <div class="btn-group">
-            <button class="btn btn-warning" @click="load_file"><i class="fa fa-upload"></i></button>
-            <button class="btn btn-info" @click="save_file"><i class="fa fa-download"></i></button>
+            <button class="btn btn-warning" @click="load_file">Upload <i class="fa fa-upload"></i></button>
+            <button class="btn btn-info" @click="save_file">Download <i class="fa fa-download"></i></button>
         </div>
       </div>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
-      <div class="form-group col-5">
+      <div class="form-group col-4">
         <label for="cost" class="cost title">Cost:</label>
         <input type="number" id="cost" class="form-control cost" v-model="item.cost" @input="update()"/>
       </div>
-      <div class="form-group col-5">
+      <div class="form-group col-4">
         <label for="value" class="value title">Value:</label>
         <input type="number" id="value" class="form-control value" v-model="item.value" @input="update()"/>
       </div>
-      <div class="form-group col-2 row" style="vertical-align:middle">
+      <div class="form-group col-4 row" style="vertical-align:middle">
         <label for="" style="margin-bottom:6px">&nbsp;</label>
         <div class="btn-group">
-            <button class="btn btn-danger" @click="remove(index)"><i class="fa fa-trash"></i></button>
-            <button class="btn btn-success" @click="add(index + 1)"><i class="fa fa-plus"></i></button>
+            <button class="btn btn-danger" @click="remove(index)">Remove <i class="fa fa-trash"></i></button>
+            <button class="btn btn-success" @click="add(index + 1)">Add <i class="fa fa-plus"></i></button>
         </div>
       </div>
     </div>
