@@ -31,7 +31,7 @@ export function update()
 }
 
 export const total = computed(() => 
-    items
+    items.value
         .filter(item => item.selected)
         .reduce((previous, current) => previous + current.value,0)
 )

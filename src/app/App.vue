@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {items, max, add, remove, update} from './script'
+import {items, max, add, remove, update, total} from './script'
 
 </script>
 <style scoped>
@@ -19,7 +19,7 @@ import {items, max, add, remove, update} from './script'
       </div>
       <div class="form-group col-5">
         <label for="cost" class="total title">Total:</label>
-        <input type="number" id="cost" class="form-control total" :value="items.filter(item=>item.selected).reduce((previous, current)=>previous + current.value,0)" disabled/>
+        <input type="number" id="cost" class="form-control total" :value="total" disabled/>
       </div>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
