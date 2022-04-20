@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import update from './algorithms/solve'
+import solve from './algorithms/solve'
 import {items, max, add, remove} from './script'
 
 </script>
@@ -15,16 +15,16 @@ import {items, max, add, remove} from './script'
   <div class="row">
     <div class="form-group col-10"  style="margin-left:20px;">
       <label for="cost">Max:</label>
-      <input type="number" id="cost" class="form-control" v-model="max" @input="update(items, max)"/>
+      <input type="number" id="cost" class="form-control" v-model="max" @input="solve(items, max)"/>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
       <div class="form-group col-5">
         <label for="cost">Cost:</label>
-        <input type="number" id="cost" class="form-control" v-model="item.cost" @input="update(items, max)"/>
+        <input type="number" id="cost" class="form-control" v-model="item.cost" @input="solve(items, max)"/>
       </div>
       <div class="form-group col-5">
         <label for="value">Value:</label>
-        <input type="number" id="value" class="form-control" v-model="item.value" @input="update(items, max)"/>
+        <input type="number" id="value" class="form-control" v-model="item.value" @input="solve(items, max)"/>
       </div>
       <div class="form-group col-2" style="vertical-align:middle">
         <div class="row">
@@ -46,7 +46,3 @@ import {items, max, add, remove} from './script'
   </div>
 </div>
 </template>
-
-<style>
-
-</style>
