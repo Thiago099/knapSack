@@ -14,12 +14,12 @@ import {items, max, add, remove, update, total} from './script'
   <div class="row">
     <div class="row item">
       <div class="form-group col-5">
-        <label for="cost" class="max title">Max:</label>
-        <input type="number" id="cost" class="form-control max" v-model="max" @input="update()"/>
+        <label for="cost" class="cost title">Max:</label>
+        <input type="number" id="cost" class="form-control cost" v-model="max" @input="update()"/>
       </div>
       <div class="form-group col-5">
-        <label for="cost" class="total title">Total:</label>
-        <input type="number" id="cost" class="form-control total" :value="total" disabled/>
+        <label for="cost" class="value title">Total:</label>
+        <input type="number" id="cost" class="form-control value" :value="total" disabled/>
       </div>
     </div>
     <div v-for="(item, index) in items" :key="item" class="row item" :class="{'selected':item.selected}">
