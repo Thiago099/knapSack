@@ -26,6 +26,7 @@ import {items, max, add, remove, update, total, save_file, load_file} from './sc
         <div class="btn-group">
             <button class="btn btn-warning" @click="load_file">Upload <i class="fa fa-upload"></i></button>
             <button class="btn btn-info" @click="save_file">Download <i class="fa fa-download"></i></button>
+            <button class="btn btn-primary" @click="update">Update <i class="fa fa-rotate-left"></i></button>
         </div>
       </div>
     </div>

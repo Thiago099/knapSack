@@ -3,7 +3,6 @@ export default function solve(items, max)
     let current_limit = max
     let current_items = [...items]
     let selected_items = []
-    current_items.map(item => item.weight = item.value / item.cost)
     while(true)
     {
         let best = {
@@ -13,30 +12,29 @@ export default function solve(items, max)
         current_items = current_items.filter(item => item.cost <= current_limit)
         for(const subject of current_items)
         {
-            let weight = subject.value
+            let weight = find_value([subject], subject.cost, subject.value)
             
-            for(const item of current_items)
+            function find_value(items, cost, value)
             {
-                if(item != subject)
+                let weight = value
+                for(const item of current_items)
                 {
-                    if(item.cost > current_limit - subject.cost)
+                    if(!items.includes(item))
                     {
-                        weight -= item.value
-                    }
-                    else
-                    {
-                        weight += item.value
+                        if(item.cost > current_limit - cost)
+                        {
+                            weight -= item.value
+                        }
+                        else
+                        {
+                            weight += find_value([...items, item],cost + item.cost, value+ item.value)
+                        }
                     }
                 }
+                return weight
             }
-            if(weight == best.weight)
-            {
-                if(subject.weight > best.item.weight)
-                {
-                    best.item = subject
-                }
-            }
-            else if(weight > best.weight)
+            
+            if(weight > best.weight)
             {
                 best.item = subject
                 best.weight = weight
