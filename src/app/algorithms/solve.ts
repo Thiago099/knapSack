@@ -27,7 +27,7 @@ export default function solve(items, max)
                         }
                         else
                         {
-                            weight += find_value([...items, item],cost + item.cost, value+ item.value)
+                            weight += find_value([...items, item], cost + item.cost, value + item.value)
                         }
                     }
                 }
