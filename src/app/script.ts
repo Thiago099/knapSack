@@ -65,6 +65,7 @@ export function load_file()
                     selected: false
                 }
             })
+            update()
         }
         reader.readAsText(file)
     }
