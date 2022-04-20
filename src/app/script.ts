@@ -21,6 +21,11 @@ export function remove(index : number)
     items.value.splice(index,1)
     update()
 }
+export function clear(){
+    items.value = []
+    max.value = 0
+    update()
+}
 
 export function update()
 {

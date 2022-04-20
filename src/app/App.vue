@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {items, max, add, remove, update, total, save_file, load_file} from './script'
+import {items, max, add, remove, update, total, save_file, load_file, clear} from './script'
 
 </script>
 <style scoped>
@@ -17,16 +17,17 @@ import {items, max, add, remove, update, total, save_file, load_file} from './sc
         <label for="cost" class="cost title">Max:</label>
         <input type="number" id="cost" class="form-control cost" v-model="max" @input="update()"/>
       </div>
-      <div class="form-group col-4">
+      <div class="form-group col-3">
         <label for="cost" class="value title">Total:</label>
         <input type="number" id="cost" class="form-control value" :value="total" disabled/>
       </div>
-      <div class="form-group col-4 row">
+      <div class="form-group col-5 row">
       <label for="" style="margin-bottom:6px">&nbsp;</label>
         <div class="btn-group">
             <button class="btn btn-warning" @click="load_file">Upload <i class="fa fa-upload"></i></button>
             <button class="btn btn-info" @click="save_file">Download <i class="fa fa-download"></i></button>
             <button class="btn btn-primary" @click="update">Update <i class="fa fa-rotate-left"></i></button>
+            <button class="btn btn-danger" @click="clear">Clear <i class="fa fa-times"></i></button>
         </div>
       </div>
     </div>
