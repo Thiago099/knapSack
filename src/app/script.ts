@@ -6,7 +6,7 @@ const data = JSON.parse(window.localStorage.getItem('data')) || {items:[], max:0
 export const items = ref(data.items)
 export const max = ref(data.max)
 
-export function add(index:number)
+export function add(index : number)
 {
     items.value.splice(index, 0, {
         cost: 0,
@@ -16,7 +16,7 @@ export function add(index:number)
     update()
 }
 
-export function remove(index:number)
+export function remove(index : number)
 {
     items.value.splice(index,1)
     update()
@@ -33,5 +33,5 @@ export function update()
 export const total = computed(() => 
     items.value
         .filter(item => item.selected)
-        .reduce((previous, current) => previous + current.value,0)
+        .reduce((previous, current) => previous + current.value, 0)
 )
