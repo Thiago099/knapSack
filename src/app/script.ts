@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import solve from './algorithms/solve'
 
 const data = JSON.parse(window.localStorage.getItem('data')) || {items:[], max:0}
@@ -29,3 +29,9 @@ export function update()
     selected.map(item => item.selected = true)
     window.localStorage.setItem('data',JSON.stringify({ items: items.value, max: max.value }))
 }
+
+export const total = computed(() => 
+    items
+        .filter(item => item.selected)
+        .reduce((previous, current) => previous + current.value,0)
+)
