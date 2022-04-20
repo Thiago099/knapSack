@@ -3,6 +3,7 @@ export default function solve(items, max)
     let current_limit = max
     let current_items = [...items].filter(item => item.cost != 0)
     let selected_items = []
+    let calls = 0
     while(true)
     {
         let best = {
@@ -17,6 +18,7 @@ export default function solve(items, max)
             
             function find_weight(items, cost, value)
             {
+                calls++
                 let weight = value
                 const costs = []
                 const values = []
@@ -65,5 +67,5 @@ export default function solve(items, max)
         }
         else break
     }
-    return [...items.filter(item => item.cost == 0),...selected_items]
+    return {selected:[...items.filter(item => item.cost == 0),...selected_items], calls}
 }
