@@ -2,6 +2,7 @@ export default function solve(items, max)
 {
     let current_limit = max
     let current_items = [...items]
+    let selected_items = []
     current_items.map(item => item.selected = false)
     while(true)
     {
@@ -45,10 +46,10 @@ export default function solve(items, max)
         if(best.item)
         {
             current_items = current_items.filter(item => item != best.item)
-            best.item.selected = true
+            selected_items.push(best.item)
             current_limit -= best.item.cost
         }
         else break
     }
-    window.localStorage.setItem('data',JSON.stringify({items:items,max:max}))
+    return selected_items
 }
