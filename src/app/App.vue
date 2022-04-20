@@ -1,40 +1,13 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref, computed } from 'vue'
-import update from './solve'
-const data = JSON.parse(window.localStorage.getItem('data')) || {items:[], max:0}
-const items = ref(data.items)
-const max = ref(data.max)
-update(items.value, max.value)
 
-function add(index:number)
-{
-  items.value.splice(index,0,{
-    cost:0,
-    value:0,
-    selected:false
-  })
-  update(items.value, max.value)
-}
-
-function remove(index:number)
-{
-  items.value.splice(index,1)
-  update(items.value, max.value)
-}
+import update from './algorithms/solve'
+import {items, max, add, remove} from './script'
 
 </script>
 <style scoped>
-.selected{
-  border: 1px solid green;
-}
-.item{
-  padding: 10px;
-  padding-bottom:20px;
-  border-radius: 10px;
-  margin: 10px;
-}
+
+@import './style.less';
+
 </style>
 
 <template>
