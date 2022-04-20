@@ -12,6 +12,7 @@ export default function solve(items, max)
         current_items = current_items.filter(item => item.cost <= current_limit)
         for(const subject of current_items)
         {
+            // how good is this item?
             let weight = find_weight([subject], subject.cost, subject.value)
             
             function find_weight(items, cost, value)
@@ -25,6 +26,7 @@ export default function solve(items, max)
                     {
                         if(item.cost > current_limit - cost)
                         {
+                            // subtracts every eliminated item
                             weight -= item.value
                             costs.push(item)
                         }
@@ -34,13 +36,21 @@ export default function solve(items, max)
                         }
                     }
                 }
-                for(const value of values)
+                // adds the best case value scenario
+                if(values.length > 0)
                 {
-                    weight += find_weight([...items, ...costs, value], cost + value.cost, value.value)
+                    let best_weight = -Infinity
+                    for(const value of values)
+                    {
+                        const current_weight = find_weight([...items, ...costs, value], cost + value.cost, value.value)
+                        if(current_weight > best_weight)
+                        best_weight = current_weight
+                    }
+                    weight += best_weight
                 }
-                return weight
+                return weight 
             }
-            
+            // finds the best item
             if(weight > best.weight)
             {
                 best.item = subject
