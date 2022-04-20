@@ -19,21 +19,21 @@ export default function solve(items, max)
             if(item != subject)
                 {
                 if(item.cost > current_limit - subject.cost)
-                {
-                    weight -= item.value
-                }
-                else
-                {
-                    weight += item.value
-                }
+                    {
+                        weight -= item.value
+                    }
+                    else
+                    {
+                        weight += item.value
+                    }
                 }
             }
             if(weight == best.weight)
             {
-            if(subject.value > best.item.value)
-            {
-                best.item = subject
-            }
+                if(subject.value > best.item.value)
+                {
+                    best.item = subject
+                }
             }
             else
             if(weight > best.weight)
