@@ -128,7 +128,7 @@ function update()
         </div>
       </div>
     </div>
-    <div class="row" style="margin-top:10px">
+    <div class="row" style="margin-top:10px;margin:10px">
         <div v-if="items.length == 0">
           <button class="btn btn-success" @click="add(items.length)">Add</button>
         </div>
