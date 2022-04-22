@@ -13,6 +13,13 @@
 //         }
 //     }
 // }
+Array.prototype.groupBy = function(key) {
+    return this.reduce(function(rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+    }, {});
+};
+
 export default function solve(items, max)
 {
     console.clear();
@@ -35,32 +42,79 @@ export default function solve(items, max)
 
     if(non_zero_cost.reduce((previous, current) => previous+current.cost,0) <= max) return {selected:items,calls:items.length}
 
-    const best = {
-        value: -Infinity,
-        items: [],
-    }
 
+    const grouped = non_zero_cost.groupBy('cost')
+    const length = []
+    const keys = Object.keys(grouped)
+
+    let best = {
+        value: -Infinity,
+        items: []
+    }
+    
     find()
+
     function find(i = 0, stack = [], cost = 0, value = 0)
     {
-        calls++
-        for(let j = i; j < non_zero_cost.length; j++)
+        for(let j = i; j < keys.length; j++)
         {
-            const current_cost = cost + non_zero_cost[j].cost
-            if(current_cost <= max)
+            const current_stack = [...stack, j]
+            expand(current_stack.map(item=>grouped[keys[item]]))
+            find(j + 1, current_stack)
+        }
+    }
+    
+    function expand(stack)
+    {
+        const max_len = stack.map(item => item.length)
+        const divisor = [1]
+        let length = 0
+
+        for(let i = 0; i < max_len.length; i++)
+        {
+            length = max_len[i] * divisor[i]
+            divisor.push(length)
+        }
+        const possibilities = []
+        for(let i = 0; i < length; i++)
+        {
+            const line = []
+            for(let k = 0; k < max_len.length; k++)
+                line.push(Math.trunc((i / divisor[k]) % max_len[k] + 1))
+            possibilities.push(line)
+        }
+        for(const possibility of possibilities)
+        {
+            calls++
+            let total_value = 0
+            let total_cost = 0
+            let overflow = false
+            let total_items = []
+            for(let i = 0; i < possibility.length; i++)
             {
-                const current_value = value + non_zero_cost[j].value
-                const current_items = [...stack, j]
-                if(current_value > best.value)
+                for(let k = 0; k < possibility[i]; k++)
                 {
-                    best.value = current_value
-                    best.items = current_items
+                    const current = stack[i][k]
+                    total_cost += current.cost
+                    if(total_cost > max) 
+                    {
+                        overflow = true
+                        break
+                    }
+                    total_items.push(current)
+                    total_value += current.value
                 }
-                find(j + 1, current_items, current_cost , current_value)
+                if(overflow) break
+            }
+            if(!overflow && total_value > best.value)
+            {
+                best = {
+                    value: total_value,
+                    items: total_items
+                }
             }
         }
     }
-    best.items = best.items.map(i => items[i])
     
-    return {selected:[...zero_cost,...best.items], calls:calls + items.length};
+    return {selected:best.items, calls};
 }
