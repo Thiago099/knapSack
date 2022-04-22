@@ -40,7 +40,7 @@ export default function solve(items, max)
         }
     }
 
-    if(non_zero_cost.reduce((previous, current) => previous+current.cost,0) <= max) return {selected:items,calls:items.length}
+    if(non_zero_cost.reduce((previous, current) => previous + current.cost,0) <= max) return {selected:items,calls:items.length}
 
 
     const grouped = non_zero_cost.groupBy('cost')
@@ -116,5 +116,5 @@ export default function solve(items, max)
         }
     }
     
-    return {selected:best.items, calls};
+    return {selected:[...zero_cost,...best.items], calls};
 }
