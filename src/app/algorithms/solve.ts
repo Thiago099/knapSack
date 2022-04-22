@@ -17,21 +17,50 @@ export default function solve(items, max)
 {
     console.clear();
     let calls = 0
-    const ids = []
-    for(const id in items) ids.push(id)
 
-    for(let i = 0; i < items.length ; i++)
+    const non_zero_cost = []
+    const zero_cost = []
+
+    for(const item of items)
     {
-        find(i,[i], items[i].cost, items[i].value)
-        function find(i, stack, cost, value)
+        if(item.cost == 0)
         {
-            for(let j = i + 1; j < items.length; j++)
+            zero_cost.push(item)
+        }
+        else
+        {
+            non_zero_cost.push(item)
+        }
+    }
+
+    if(non_zero_cost.reduce((previous, current) => previous+current.cost,0) <= max) return {selected:items,calls:items.length}
+
+    const best = {
+        value: -Infinity,
+        items: [],
+    }
+
+    find()
+    function find(i = -1, stack = [], cost = 0, value = 0)
+    {
+        calls++
+        for(let j = i + 1; j < non_zero_cost.length; j++)
+        {
+            const current_cost = cost + non_zero_cost[j].cost
+            if(current_cost <= max)
             {
-                console.log(cost, value)
-                find(j, [...stack, j], cost + items[j].cost, value + items[j].value)
+                const current_value = value + non_zero_cost[j].value
+                const current_items = [...stack, j]
+                if(current_value > best.value)
+                {
+                    best.value = current_value
+                    best.items = current_items
+                }
+                find(j, current_items, current_cost , current_value)
             }
         }
     }
+    best.items = best.items.map(i => items[i])
     
-    return {selected:items, calls};
+    return {selected:[...zero_cost,...best.items], calls:calls+items.length};
 }
