@@ -62,5 +62,5 @@ export default function solve(items, max)
     }
     best.items = best.items.map(i => items[i])
     
-    return {selected:[...zero_cost,...best.items], calls:calls+items.length};
+    return {selected:[...zero_cost,...best.items], calls:calls + items.length};
 }
