@@ -26,7 +26,7 @@ export default function solve(items, max)
     }
 
     if(non_zero_cost.reduce((previous, current) => previous + current.cost,0) <= max) return {selected:items,calls:items.length}
-    
+
     const grouped = non_zero_cost.groupBy('cost')
     const keys = Object.keys(grouped)
 
@@ -45,7 +45,7 @@ export default function solve(items, max)
     
     find()
 
-    function find(i = 0, stack = [], cost = 0, value = 0)
+    function find(i = 0, stack = [])
     {
         for(let j = i; j < keys.length; j++)
         {
