@@ -1,18 +1,3 @@
-// function uniloop(array) {
-//     for(let i = 0; i < array.length ; i++)
-//     {
-//         find(i,[i])
-//         function find(i, stack)
-//         {
-//             for(let j = i + 1; j < array.length; j++)
-//             {
-//                 const cur = [...stack, j]
-//                 console.log(cur)
-//                 find(j, cur)
-//             }
-//         }
-//     }
-// }
 Array.prototype.groupBy = function(key) {
     return this.reduce(function(rv, x) {
         (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -41,11 +26,10 @@ export default function solve(items, max)
     }
 
     if(non_zero_cost.reduce((previous, current) => previous + current.cost,0) <= max) return {selected:items,calls:items.length}
-
-
+    
     const grouped = non_zero_cost.groupBy('cost')
-    const length = []
     const keys = Object.keys(grouped)
+
     for(const group of keys)
     {
         grouped[group] = grouped[group].sort((a,b) => {
@@ -73,9 +57,7 @@ export default function solve(items, max)
     
     function expand(stack)
     {
-        if(stack.length == 0) return true
         const max_len = stack.map(item => item.length)
-        console.log(max_len)
         const divisor = [1]
         let length = 0
 
