@@ -32,7 +32,7 @@ export function clear(){
 export function update()
 {
     const start_time = performance.now()
-    const {selected, calls} = solve(items.value, max.value)
+    const {selected, calls} = solve(items.value.filter(item=>item.value), max.value)
     elapsed.value = (performance.now() - start_time).toFixed(2) + ' ms - '+calls+' calls'
     items.value.map(item => item.selected = false)
     selected.map(item => item.selected = true)
