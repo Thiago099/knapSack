@@ -46,6 +46,12 @@ export default function solve(items, max)
     const grouped = non_zero_cost.groupBy('cost')
     const length = []
     const keys = Object.keys(grouped)
+    for(const group of keys)
+    {
+        grouped[group] = grouped[group].sort((a,b) => b.value    - a.value )
+    }
+
+    console.log(grouped)
 
     let best = {
         value: -Infinity,
