@@ -48,10 +48,11 @@ export default function solve(items, max)
     const keys = Object.keys(grouped)
     for(const group of keys)
     {
-        grouped[group] = grouped[group].sort((a,b) => b.value    - a.value )
+        grouped[group] = grouped[group].sort((a,b) => {
+            calls++
+            return b.value - a.value
+        })
     }
-
-    console.log(grouped)
 
     let best = {
         value: -Infinity,
@@ -65,14 +66,16 @@ export default function solve(items, max)
         for(let j = i; j < keys.length; j++)
         {
             const current_stack = [...stack, j]
-            expand(current_stack.map(item=>grouped[keys[item]]))
-            find(j + 1, current_stack)
+            if(expand(current_stack.map(item => grouped[keys[item]])))
+                find(j + 1, current_stack)
         }
     }
     
     function expand(stack)
     {
+        if(stack.length == 0) return true
         const max_len = stack.map(item => item.length)
+        console.log(max_len)
         const divisor = [1]
         let length = 0
 
@@ -89,6 +92,7 @@ export default function solve(items, max)
                 line.push(Math.trunc((i / divisor[k]) % max_len[k] + 1))
             possibilities.push(line)
         }
+        let keep_branch = false
         for(const possibility of possibilities)
         {
             calls++
@@ -112,14 +116,19 @@ export default function solve(items, max)
                 }
                 if(overflow) break
             }
-            if(!overflow && total_value > best.value)
+            if(!overflow)
             {
-                best = {
-                    value: total_value,
-                    items: total_items
+                keep_branch = true
+                if(total_value > best.value)
+                {
+                    best = {
+                        value: total_value,
+                        items: total_items
+                    }
                 }
             }
         }
+        return keep_branch
     }
     
     return {selected:[...zero_cost,...best.items], calls};
