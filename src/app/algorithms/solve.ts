@@ -1,72 +1,37 @@
+// function uniloop(array) {
+//     for(let i = 0; i < array.length ; i++)
+//     {
+//         find(i,[i])
+//         function find(i, stack)
+//         {
+//             for(let j = i + 1; j < array.length; j++)
+//             {
+//                 const cur = [...stack, j]
+//                 console.log(cur)
+//                 find(j, cur)
+//             }
+//         }
+//     }
+// }
 export default function solve(items, max)
 {
-    if(items.reduce((previous, current) => previous + current.cost, 0) < max) return {selected:items,calls:0}
-    let current_limit = max
-    let current_items = [...items].filter(item => item.cost != 0)
-    let selected_items = []
+    console.clear();
     let calls = 0
-    while(true)
+    const ids = []
+    for(const id in items) ids.push(id)
+
+    for(let i = 0; i < items.length ; i++)
     {
-        let best = {
-            weight: -Infinity,
-            item: null
-        }
-        current_items = current_items.filter(item => item.cost <= current_limit)
-        for(const subject of current_items)
+        find(i,[i], items[i].cost, items[i].value)
+        function find(i, stack, cost, value)
         {
-            // how good is this item?
-            let weight = find_weight([subject], subject.cost, subject.value)
-            
-            function find_weight(items, cost, value)
+            for(let j = i + 1; j < items.length; j++)
             {
-                calls++
-                let weight = value
-                const costs = []
-                const values = []
-                for(const item of current_items)
-                {
-                    if(!items.includes(item))
-                    {
-                        if(item.cost > current_limit - cost)
-                        {
-                            // subtracts every eliminated item
-                            weight -= item.value
-                            costs.push(item)
-                        }
-                        else
-                        {
-                            values.push(item)
-                        }
-                    }
-                }
-                // adds the best case value scenario
-                if(values.length > 0)
-                {
-                    let best_weight = -Infinity
-                    for(const value of values)
-                    {
-                        const current_weight = find_weight([...items, ...costs, value], cost + value.cost, value.value)
-                        if(current_weight > best_weight)
-                        best_weight = current_weight
-                    }
-                    weight += best_weight
-                }
-                return weight 
-            }
-            // finds the best item
-            if(weight > best.weight)
-            {
-                best.item = subject
-                best.weight = weight
+                console.log(cost, value)
+                find(j, [...stack, j], cost + items[j].cost, value + items[j].value)
             }
         }
-        if(best.item)
-        {
-            current_items = current_items.filter(item => item != best.item)
-            selected_items.push(best.item)
-            current_limit -= best.item.cost
-        }
-        else break
     }
-    return {selected:[...items.filter(item => item.cost == 0),...selected_items], calls}
+    
+    return {selected:items, calls};
 }
