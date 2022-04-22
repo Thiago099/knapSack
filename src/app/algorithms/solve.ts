@@ -41,10 +41,10 @@ export default function solve(items, max)
     }
 
     find()
-    function find(i = -1, stack = [], cost = 0, value = 0)
+    function find(i = 0, stack = [], cost = 0, value = 0)
     {
         calls++
-        for(let j = i + 1; j < non_zero_cost.length; j++)
+        for(let j = i; j < non_zero_cost.length; j++)
         {
             const current_cost = cost + non_zero_cost[j].cost
             if(current_cost <= max)
@@ -56,7 +56,7 @@ export default function solve(items, max)
                     best.value = current_value
                     best.items = current_items
                 }
-                find(j, current_items, current_cost , current_value)
+                find(j + 1, current_items, current_cost , current_value)
             }
         }
     }
